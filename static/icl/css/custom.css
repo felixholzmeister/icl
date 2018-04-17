@@ -12,7 +12,7 @@ h2 {
     border-bottom: none;
 }
 
-.next-button {
+.otree-btn-next {
     margin: 40px auto;
     display: inherit;
 }
@@ -49,10 +49,19 @@ h2 {
 /* *** Decision/Results Table *** */
 /* ****************************************************************************************************************** */
 
+.card-header {
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
 .table>tbody>tr>th,
 .table>tbody>tr>td {
     vertical-align: middle;
-    padding: 5px 15px;
+    padding: 15px;
     height: 65px;
     min-width: 100px;
 }

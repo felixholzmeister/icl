@@ -1,5 +1,5 @@
 {% extends "global/Page.html" %}
-{% load staticfiles otree_tags %}
+{% load staticfiles otree %}
 {% load i18n %}
 
 
@@ -26,17 +26,18 @@
 
     <div class="wrapper">
 
-        <div class="panel panel-default info">
+        <div class="card info">
             {% blocktrans trimmed %}
                 The following decision was randomly chosen for your payment:
             {% endblocktrans %}
         </div>
+        <br/>
 
         <!-- ------------------------------------------------------------------------------------------------------- -->
         <!-- Table - Decision -->
         <!-- ------------------------------------------------------------------------------------------------------- -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card">
+            <div class="card-header">
                 {% blocktrans trimmed %}
                     Your choice:
                 {% endblocktrans %}
@@ -137,22 +138,20 @@
                 {% endif %}
             </table>
         </div>
-
+        <br/>
 
         <!-- ------------------------------------------------------------------------------------------------------- -->
         <!-- Payoff Information -->
         <!-- ------------------------------------------------------------------------------------------------------- -->
-        <div class="panel panel-default info">
+        <div class="card info">
 
             {% if option_to_pay == 'I' %}
-
                 {% blocktrans trimmed with payoff_relevant=payoff_relevant %}
                     As indicated above, you stated to be indifferent between "Option A" and "Option B" in this choice.
                     "Option {{ payoff_relevant }}" was randomly chosen to determine your payment.
                 {% endblocktrans %}
                 <br/>
             {% else %}
-
                 {% blocktrans trimmed with option_to_pay=option_to_pay %}
                     As indicated above, you decided for "Option {{ option_to_pay }}" in this choice.
                 {% endblocktrans %}
@@ -167,9 +166,9 @@
                 {% endblocktrans %}
             {% endif %}
 
-            <br/><br/>
+            <br/>
             {% blocktrans trimmed with payoff=payoff %}
-                Your payoff in this task equals <b>{{ payoff }}</b>.
+                Your payoff in this task equals {{ payoff }}.
             {% endblocktrans %}
         </div>
 

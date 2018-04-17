@@ -20,7 +20,7 @@ class Subsession(BaseSubsession):
 
     # initiate list of sure payoffs and implied switching row in first round
     # ------------------------------------------------------------------------------------------------------------
-    def before_session_starts(self):
+    def creating_session(self):
         if self.round_number == 1:
             for p in self.get_players():
                 p.participant.vars['icl_sure_payoffs'] = [c(Constants.sure_payoff)]
@@ -42,9 +42,9 @@ class Player(BasePlayer):
     # add model fields to class player
     # ----------------------------------------------------------------------------------------------------------------
     random_draw = models.IntegerField()
-    payoff_relevant = models.CharField()
+    payoff_relevant = models.StringField()
     sure_payoff = models.FloatField()
-    choice = models.CharField()
+    choice = models.StringField()
     switching_row = models.IntegerField()
 
     # set sure payoff for next choice
