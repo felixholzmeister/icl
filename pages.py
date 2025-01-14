@@ -25,6 +25,13 @@ class Instructions(Page):
     def is_displayed(self):
         return self.subsession.round_number == 1
 
+    def vars_for_template(self):
+        vars = vars_for_all_templates(self)
+        vars.update({
+            'n': Constants.num_choices
+        })
+        return vars
+
 
 # ******************************************************************************************************************** #
 # *** PAGE DECISION *** #
@@ -51,12 +58,14 @@ class Decision(Page):
         page = self.subsession.round_number
         progress = page / total * 100
 
-        return {
+        vars = vars_for_all_templates(self)
+        vars.update({
             'page':        page,
             'total':       total,
             'progress':    progress,
             'sure_payoff': self.participant.vars['icl_sure_payoffs'][page - 1]
-        }
+        })
+        return vars
 
     # set sure payoffs for next choice, payoffs, and switching row
     # ----------------------------------------------------------------------------------------------------------------
@@ -86,12 +95,14 @@ class Results(Page):
         payoff_relevant = self.player.in_round(choice_to_pay).payoff_relevant
         sure_payoff = self.player.participant.vars['icl_sure_payoffs'][choice_to_pay - 1]
 
-        return {
+        vars = vars_for_all_templates(self)
+        vars.update({
             'sure_payoff':     sure_payoff,
             'option_to_pay':   option_to_pay,
             'payoff_relevant': payoff_relevant,
             'payoff':          self.player.in_round(choice_to_pay).payoff
-        }
+        })
+        return vars
 
 
 # ******************************************************************************************************************** #
