@@ -53,24 +53,20 @@ class Player(BasePlayer):
 
         # add current round's sure payoff to model field
         # ------------------------------------------------------------------------------------------------------------
-        self.sure_payoff = self.participant.vars['icl_sure_payoffs'][self.round_number - 1]
+        self.sure_payoff = float(self.participant.vars['icl_sure_payoffs'][self.round_number - 1])
 
         # determine sure payoff for next choice and append list of sure payoffs
         # ------------------------------------------------------------------------------------------------------------
         if not self.round_number == Constants.num_choices:
 
             if self.choice == 'A':
-                self.participant.vars['icl_sure_payoffs'].append(
-                    c(self.participant.vars['icl_sure_payoffs'][self.round_number - 1]
-                    + Constants.delta / 2 ** (self.round_number - 1))
-                )
+                next_sure_payoff = self.participant.vars['icl_sure_payoffs'][self.round_number - 1] + Constants.delta / 2 ** (self.round_number - 1)
             elif self.choice == 'B':
-                self.participant.vars['icl_sure_payoffs'].append(
-                    c(self.participant.vars['icl_sure_payoffs'][self.round_number - 1]
-                    - Constants.delta / 2 ** (self.round_number - 1))
-                )
+                next_sure_payoff = self.participant.vars['icl_sure_payoffs'][self.round_number - 1] - Constants.delta / 2 ** (self.round_number - 1)
             else:
-                pass
+                next_sure_payoff = self.participant.vars['icl_sure_payoffs'][self.round_number - 1]
+
+            self.participant.vars['icl_sure_payoffs'].append(float(next_sure_payoff))
 
     # update implied switching row each round
     # ----------------------------------------------------------------------------------------------------------------

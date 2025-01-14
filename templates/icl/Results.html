@@ -38,20 +38,16 @@
         <!-- ------------------------------------------------------------------------------------------------------- -->
         <div class="card">
             <div class="card-header">
-                {% blocktrans trimmed %}
-                    Your choice:
-                {% endblocktrans %}
+                {% trans "Your choice:" %}
             </div>
             <table class="table">
                 <tr>
                     <th>{% trans "Option A:" %}</th>
                     <td>
-                        {% with hi=hi lo=lo p_hi=p_hi p_lo=p_lo %}
-                            {% blocktrans trimmed %}
-                                a {{ p_hi }} chance of winning {{ hi }} and <br/>
-                                a {{ p_lo }} chance of winning {{ lo }}
-                            {% endblocktrans %}
-                        {% endwith %}
+                        {% blocktrans trimmed with p_hi=p_hi hi=hi p_lo=p_lo lo=lo %}
+                            a {{ p_hi }} chance of winning {{ hi }} and <br/>
+                            a {{ p_lo }} chance of winning {{ lo }}
+                        {% endblocktrans %}
                     </td>
                     <td>
                         {% if Constants.buttons == True %}
@@ -78,11 +74,9 @@
                         {% trans "Option B:" %}
                     </th>
                     <td>
-                        {% with sure_payoff=sure_payoff %}
-                            {% blocktrans trimmed %}
-                                an amount of {{ sure_payoff }} as a sure payment
-                            {% endblocktrans %}
-                        {% endwith %}
+                        {% blocktrans trimmed with sure_payoff=sure_payoff %}
+                            an amount of {{ sure_payoff }} as a sure payment
+                        {% endblocktrans %}
                     </td>
                     <td>
                         {% if Constants.buttons == True %}
@@ -109,11 +103,7 @@
                     <th>
                     </th>
                     <td>
-                        {% with sure_payoff=sure_payoff %}
-                            {% blocktrans trimmed %}
-                                I'm indifferent between Option A and Option B
-                            {% endblocktrans %}
-                        {% endwith %}
+                        {% trans "I'm indifferent between Option A and Option B" %}
                     </td>
                     <td>
                         {% if Constants.buttons == True %}
@@ -160,10 +150,7 @@
 
             {% if payoff_relevant == "A" %}
                 <br/>
-                {% blocktrans trimmed %}
-                    For "Option A", one of the two possible outcomes has been
-                    randomly realized based on the corresponding probabilities.
-                {% endblocktrans %}
+                {% trans "For 'Option A', one of the two possible outcomes has been randomly realized based on the corresponding probabilities." %}
             {% endif %}
 
             <br/>
