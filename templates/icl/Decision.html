@@ -42,84 +42,79 @@
             </div>
         {% endif %}
 
-
-        <!-- ------------------------------------------------------------------------------------------------------- -->
-        <!-- Table - Lottery Decisions (Option A/B) -->
-        <!-- ------------------------------------------------------------------------------------------------------- -->
-        <div class="card">
-            <div class="card-header">
-                {% trans "What do you prefer?" %}
-            </div>
-            <table class="table">
-                <tr>
-                    <th>{% trans "Option A:" %}</th>
-                    <td>
-                        {% with hi=hi lo=lo p_hi=p_hi p_lo=p_lo %}
-                            {% blocktrans trimmed %}
+        <form method="post">
+            <!-- ------------------------------------------------------------------------------------------------------- -->
+            <!-- Table - Lottery Decisions (Option A/B) -->
+            <!-- ------------------------------------------------------------------------------------------------------- -->
+            <div class="card">
+                <div class="card-header">
+                    {% trans "What do you prefer?" %}
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>{% trans "Option A:" %}</th>
+                        <td>
+                            {% blocktrans trimmed with p_hi=p_hi hi=hi p_lo=p_lo lo=lo %}
                                 a {{ p_hi }} chance of winning {{ hi }} and <br/>
                                 a {{ p_lo }} chance of winning {{ lo }}
                             {% endblocktrans %}
-                        {% endwith %}
-                    </td>
-                    <td>
-                        {% if Constants.buttons == True %}
-                            <button class="btn btn-primary choice" name="choice" value="A" required>
-                                {% trans "Option A" %}
-                            </button>
-                        {% else %}
-                            <input type="radio" name="choice" value="A" required>
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        {% trans "Option B:" %}
-                    </th>
-                    <td>
-                        {% with sure_payoff=sure_payoff %}
-                            {% blocktrans trimmed %}
+                        </td>
+                        <td>
+                            {% if Constants.buttons == True %}
+                                <button class="btn btn-primary choice" name="choice" value="A" required>
+                                    {% trans "Option A" %}
+                                </button>
+                            {% else %}
+                                <input type="radio" name="choice" value="A" required>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {% trans "Option B:" %}
+                        </th>
+                        <td>
+                            {% blocktrans trimmed with sure_payoff=sure_payoff %}
                                 an amount of {{ sure_payoff }}
                                 as a sure payment
                             {% endblocktrans %}
-                        {% endwith %}
-                    </td>
-                    <td>
-                        {% if Constants.buttons == True %}
-                            <button class="btn btn-primary choice" name="choice" value="B" required>
-                                {% trans "Option B" %}
-                            </button>
-                        {% else %}
-                            <input type="radio" name="choice" value="B" required>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% if Constants.indifference == True %}
-                <tr>
-                    <th>
-                    </th>
-                    <td>
-                        {% blocktrans trimmed %}
-                            I'm indifferent between Option A and Option B
-                        {% endblocktrans %}
-                    </td>
-                    <td>
-                        {% if Constants.buttons == True %}
-                            <button class="btn btn-primary choice" name="choice" value="I" required>
-                                {% trans "Indifferent" %}
-                            </button>
-                        {% else %}
-                            <input type="radio" name="choice" value="I" required>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endif %}
-            </table>
-        </div>
+                        </td>
+                        <td>
+                            {% if Constants.buttons == True %}
+                                <button class="btn btn-primary choice" name="choice" value="B" required>
+                                    {% trans "Option B" %}
+                                </button>
+                            {% else %}
+                                <input type="radio" name="choice" value="B" required>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% if Constants.indifference == True %}
+                    <tr>
+                        <th>
+                        </th>
+                        <td>
+                            {% trans "I'm indifferent between Option A and Option B" %}
+                        </td>
+                        <td>
+                            {% if Constants.buttons == True %}
+                                <button class="btn btn-primary choice" name="choice" value="I" required>
+                                    {% trans "Indifferent" %}
+                                </button>
+                            {% else %}
+                                <input type="radio" name="choice" value="I" required>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+
+            {% if Constants.buttons == False %}
+                {% next_button %}
+            {% endif %}
+        </form>
 
     </div>
-
-    {% if Constants.buttons == False %}
-        {% next_button %}
-    {% endif %}
 
 {% endblock %}
